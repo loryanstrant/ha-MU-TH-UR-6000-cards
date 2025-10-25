@@ -121,7 +121,7 @@ class MuthurClockCard extends MuthurBaseCard {
       const date = now.getDate();
       const year = now.getFullYear();
       
-      this._date = `${dayName} <span class="date-separator">//</span> ${month} ${date}, ${year}`;
+      this._date = `${dayName} // ${month} ${date}, ${year}`;
     }
   }
 
@@ -148,9 +148,7 @@ class MuthurClockCard extends MuthurBaseCard {
             </div>
 
             ${showDate ? html`
-              <div class="date-display">
-                ${this.renderDateHTML(this._date)}
-              </div>
+              <div class="date-display">${this._date}</div>
             ` : ''}
 
             ${showTimezone ? html`
@@ -160,13 +158,6 @@ class MuthurClockCard extends MuthurBaseCard {
         </div>
       </div>
     `;
-  }
-
-  renderDateHTML(dateStr) {
-    // Create a temporary div to parse HTML string
-    const template = document.createElement('template');
-    template.innerHTML = dateStr;
-    return html`${template.content.textContent ? this._date : ''}`;
   }
 
   static getConfigElement() {

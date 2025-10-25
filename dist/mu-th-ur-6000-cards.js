@@ -665,7 +665,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0.3; }
         }
-      `]}constructor(){super(),this._time="",this._date="",this._updateTime()}connectedCallback(){super.connectedCallback(),this._interval=setInterval(()=>this._updateTime(),1e3)}disconnectedCallback(){super.disconnectedCallback(),this._interval&&clearInterval(this._interval)}_updateTime(){const t=new Date,e=!1!==this.config?.format_24h;let i=t.getHours();const s=t.getMinutes(),r=t.getSeconds();let a="";e||(a=i>=12?" PM":" AM",i=i%12||12),this._time=`${String(i).padStart(2,"0")}:${String(s).padStart(2,"0")}${a}`,this._seconds=String(r).padStart(2,"0");const n=["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"],o=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];if(!1!==this.config?.show_date){const e=n[t.getDay()],i=o[t.getMonth()],s=t.getDate(),r=t.getFullYear();this._date=`${e} <span class="date-separator">//</span> ${i} ${s}, ${r}`}}render(){if(!this.config)return B``;const t=this.config.title||"SYSTEM TIME",e=!1!==this.config.show_seconds,i=!1!==this.config.show_date,s=!0===this.config.show_timezone,r=Intl.DateTimeFormat().resolvedOptions().timeZone;return B`
+      `]}constructor(){super(),this._time="",this._date="",this._updateTime()}connectedCallback(){super.connectedCallback(),this._interval=setInterval(()=>this._updateTime(),1e3)}disconnectedCallback(){super.disconnectedCallback(),this._interval&&clearInterval(this._interval)}_updateTime(){const t=new Date,e=!1!==this.config?.format_24h;let i=t.getHours();const s=t.getMinutes(),r=t.getSeconds();let a="";e||(a=i>=12?" PM":" AM",i=i%12||12),this._time=`${String(i).padStart(2,"0")}:${String(s).padStart(2,"0")}${a}`,this._seconds=String(r).padStart(2,"0");const n=["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"],o=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];if(!1!==this.config?.show_date){const e=n[t.getDay()],i=o[t.getMonth()],s=t.getDate(),r=t.getFullYear();this._date=`${e} // ${i} ${s}, ${r}`}}render(){if(!this.config)return B``;const t=this.config.title||"SYSTEM TIME",e=!1!==this.config.show_seconds,i=!1!==this.config.show_date,s=!0===this.config.show_timezone,r=Intl.DateTimeFormat().resolvedOptions().timeZone;return B`
       <div class="card">
         <div class="card-content">
           <div class="card-header">${t}</div>
@@ -676,9 +676,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
             </div>
 
             ${i?B`
-              <div class="date-display">
-                ${this.renderDateHTML(this._date)}
-              </div>
+              <div class="date-display">${this._date}</div>
             `:""}
 
             ${s?B`
@@ -687,7 +685,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
           </div>
         </div>
       </div>
-    `}renderDateHTML(t){const e=document.createElement("template");return e.innerHTML=t,B`${e.content.textContent?this._date:""}`}static getConfigElement(){return document.createElement("muthur-clock-card-editor")}static getStubConfig(){return{title:"SYSTEM TIME",format_24h:!0,show_seconds:!0,show_date:!0,show_timezone:!1}}});customElements.define("muthur-glance-card",class extends ct{static get styles(){return[ot,a`
+    `}static getConfigElement(){return document.createElement("muthur-clock-card-editor")}static getStubConfig(){return{title:"SYSTEM TIME",format_24h:!0,show_seconds:!0,show_date:!0,show_timezone:!1}}});customElements.define("muthur-glance-card",class extends ct{static get styles(){return[ot,a`
         .glance-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
