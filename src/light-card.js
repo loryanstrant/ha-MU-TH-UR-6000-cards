@@ -60,6 +60,7 @@ class MuthurLightCard extends MuthurBaseCard {
 
         .light-icon {
           font-size: 2em;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .light-status {
