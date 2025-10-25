@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MU/TH/UR 6000 Cards - Test Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #0d0d0d;
+      font-family: 'Courier New', Monaco, monospace;
+      color: #00ff41;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ff41;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #008f11;
+      font-size: 0.9em;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      color: #00ff41;
+      border-bottom: 2px solid #00ff41;
+      padding-bottom: 10px;
+      margin: 40px 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .note {
+      background-color: rgba(0, 255, 65, 0.1);
+      border: 1px solid #00ff41;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .note h3 {
+      margin-top: 0;
+      color: #00ff41;
+    }
+
+    code {
+      background-color: rgba(0, 255, 65, 0.1);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', Monaco, monospace;
+    }
+
+    pre {
+      background-color: rgba(0, 255, 65, 0.05);
+      border: 1px solid #008f11;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MU/TH/UR 6000 CARDS</h1>
+    <div class="subtitle">Weyland-Yutani Corporation - Building Better Worlds</div>
+
+    <div class="note">
+      <h3>⚠️ Test Environment</h3>
+      <p>This is a standalone test page. To see the cards in action, you need to:</p>
+      <ol>
+        <li>Load this page in a browser</li>
+        <li>The cards are shown below with mock Home Assistant data</li>
+        <li>For full functionality, install in Home Assistant</li>
+      </ol>
+      <p><strong>Note:</strong> Some interactive features require the Home Assistant environment.</p>
+    </div>
+
+    <h2 class="section-title">&gt; Status Card</h2>
+    <div class="grid">
+      <muthur-status-card></muthur-status-card>
+    </div>
+
+    <h2 class="section-title">&gt; Sensor Card</h2>
+    <div class="grid">
+      <muthur-sensor-card></muthur-sensor-card>
+    </div>
+
+    <h2 class="section-title">&gt; Button Card</h2>
+    <div class="grid">
+      <muthur-button-card></muthur-button-card>
+    </div>
+
+    <h2 class="section-title">&gt; Text Card</h2>
+    <div class="grid">
+      <muthur-text-card></muthur-text-card>
+    </div>
+
+    <div class="note">
+      <h3>Installation Instructions</h3>
+      <p>To use these cards in Home Assistant:</p>
+      <pre><code># Via HACS (Recommended)
+1. Go to HACS → Frontend
+2. Click menu → Custom repositories
+3. Add: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards
+4. Category: Lovelace
+5. Install "MU/TH/UR 6000 Cards"
+
+# Manual Installation
+1. Download mu-th-ur-6000-cards.js
+2. Copy to config/www/
+3. Add resource in configuration.yaml:
+   lovelace:
+     resources:
+       - url: /local/mu-th-ur-6000-cards.js
+         type: module</code></pre>
+    </div>
+
+    <h2 class="section-title">&gt; Example Configuration</h2>
+    <pre><code># Status Card Example
+type: custom:muthur-status-card
+title: SYSTEM STATUS
+entities:
+  - entity: sensor.temperature
+    name: AMBIENT TEMP
+  - entity: binary_sensor.motion
+    name: MOTION DETECT
+message: ALL SYSTEMS OPERATIONAL
+
+# Sensor Card Example
+type: custom:muthur-sensor-card
+entity: sensor.cpu_temperature
+name: CORE TEMPERATURE
+show_graph: true
+max: 100
+
+# Button Card Example
+type: custom:muthur-button-card
+title: TERMINAL CONTROL
+columns: 2
+buttons:
+  - entity: light.living_room
+    name: ILLUMINATION
+  - entity: switch.coffee_maker
+    name: BEVERAGE SYS
+
+# Text Card Example
+type: custom:muthur-text-card
+title: MESSAGE
+content: |
+  ATTENTION: CREW MEMBERS
+  ALL PERSONNEL REPORT TO BRIDGE
+  - WEYLAND-YUTANI CORP</code></pre>
+  </div>
+
+  <script type="module">
+    // Load the cards
+    // Note: This assumes test.html is in the root directory alongside the dist folder
+    // If you move this file, update the import path accordingly
+    import './dist/mu-th-ur-6000-cards.js';
+
+    // Mock Home Assistant object for testing
+    const mockHass = {
+      states: {
+        'sensor.temperature': {
+          state: '22.5',
+          attributes: {
+            friendly_name: 'Temperature',
+            unit_of_measurement: '°C'
+          }
+        },
+        'sensor.humidity': {
+          state: '45',
+          attributes: {
+            friendly_name: 'Humidity',
+            unit_of_measurement: '%'
+          }
+        },
+        'binary_sensor.motion': {
+          state: 'off',
+          attributes: {
+            friendly_name: 'Motion Sensor'
+          }
+        },
+        'light.living_room': {
+          state: 'on',
+          attributes: {
+            friendly_name: 'Living Room Light'
+          }
+        }
+      },
+      callService: (domain, service, data) => {
+        console.log('Service call:', domain, service, data);
+        alert(`Mock service call: ${domain}.${service}`);
+      }
+    };
+
+    // Initialize cards with mock config
+    window.addEventListener('load', () => {
+      // Status Card
+      const statusCard = document.querySelector('muthur-status-card');
+      if (statusCard) {
+        statusCard.hass = mockHass;
+        statusCard.setConfig({
+          title: 'SYSTEM STATUS',
+          entities: [
+            'sensor.temperature',
+            'sensor.humidity',
+            'binary_sensor.motion'
+          ],
+          message: 'ALL SYSTEMS OPERATIONAL'
+        });
+      }
+
+      // Sensor Card
+      const sensorCard = document.querySelector('muthur-sensor-card');
+      if (sensorCard) {
+        sensorCard.hass = mockHass;
+        sensorCard.setConfig({
+          entity: 'sensor.temperature',
+          name: 'AMBIENT TEMPERATURE',
+          show_graph: true,
+          max: 40
+        });
+      }
+
+      // Button Card
+      const buttonCard = document.querySelector('muthur-button-card');
+      if (buttonCard) {
+        buttonCard.hass = mockHass;
+        buttonCard.setConfig({
+          title: 'TERMINAL CONTROL',
+          columns: 2,
+          buttons: [
+            {
+              entity: 'light.living_room',
+              name: 'ILLUMINATION',
+              icon: '💡'
+            },
+            {
+              entity: 'binary_sensor.motion',
+              name: 'MOTION SENSOR',
+              icon: '🔍'
+            }
+          ]
+        });
+      }
+
+      // Text Card
+      const textCard = document.querySelector('muthur-text-card');
+      if (textCard) {
+        textCard.hass = mockHass;
+        textCard.setConfig({
+          title: 'SYSTEM MESSAGE',
+          content: 'ATTENTION: CREW MEMBERS\n\nTRANSMISSION RECEIVED FROM CORPORATE\nALL PERSONNEL REPORT TO BRIDGE\n\n- WEYLAND-YUTANI CORP',
+          show_prompt: true
+        });
+      }
+    });
+  </script>
+</body>
+</html>

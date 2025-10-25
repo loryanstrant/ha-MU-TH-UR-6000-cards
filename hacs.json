@@ -1,0 +1,7 @@
+{
+  "name": "MU/TH/UR 6000 Cards",
+  "content_in_root": false,
+  "filename": "mu-th-ur-6000-cards.js",
+  "render_readme": true,
+  "homeassistant": "2023.1.0"
+}
