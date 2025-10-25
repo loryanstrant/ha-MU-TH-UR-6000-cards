@@ -44,6 +44,17 @@ lovelace:
 
 4. Restart Home Assistant
 
+## Development
+
+For local development and testing:
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Build the project: `npm run build`
+4. Open `test.html` in a browser to preview cards with mock data
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
+
 ## Card Types
 
 ### 1. Status Card

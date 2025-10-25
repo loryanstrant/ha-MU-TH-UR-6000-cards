@@ -130,8 +130,11 @@ ha-MU-TH-UR-6000-cards/
 ├── dist/                   # Built files (committed for HACS)
 ├── examples/              # Example configurations
 ├── .github/workflows/     # CI/CD workflows
+├── test.html              # Local test page
 ├── package.json           # Dependencies and scripts
 ├── rollup.config.js       # Build configuration
+├── CHANGELOG.md           # Version history
+├── CONTRIBUTING.md        # Contribution guidelines
 └── README.md             # Main documentation
 ```
 
