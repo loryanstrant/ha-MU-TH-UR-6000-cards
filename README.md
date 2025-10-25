@@ -1,12 +1,15 @@
-# MU/TH/UR 6000 Cards for Home Assistant
-
-A series of custom cards for Home Assistant based on the appearance of the MU/TH/UR 6000 mainframe computer from the Alien movie franchise. These cards feature a retro green monochrome terminal aesthetic with scanline effects, terminal-style text, and the iconic Weyland-Yutani Corporation design language.
-
 ![MU/TH/UR 6000](https://img.shields.io/badge/MU%2FTH%2FUR-6000-00ff41?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==)
 ![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-41BDF5?style=for-the-badge&logo=home-assistant)
 ![License](https://img.shields.io/badge/License-MIT-00ff41?style=for-the-badge)
 
-## Screenshots
+# MU/TH/UR 6000 Cards for Home Assistant
+
+A series of custom cards for Home Assistant based on the appearance of the MU/TH/UR 6000 mainframe computer from the Alien movie franchise. These cards feature a retro green monochrome terminal aesthetic with scanline effects, terminal-style text, and the iconic Weyland-Yutani Corporation design language.
+
+These pair nicely with the [Weyland-Yutani theme](https://github.com/loryanstrant/ha-weylandyutani).
+
+
+## Inspiration
 
 Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` for full-size images):
 
@@ -15,6 +18,8 @@ Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` fo
   <img src="mother-examples/571223280_24915666581419347_6254316241379552192_n.jpg" width="30%" alt="Example 2">
   <img src="mother-examples/571776320_24915657118086960_2695871652407472305_n.jpg" width="30%" alt="Example 3">
 </p>
+
+** Note: the above images are AI generated.
 
 ## Features
 
@@ -71,6 +76,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
 Displays multiple entity states in a structured list format with status indicators.
 
+#### Example
+
+<img width="605" height="440" alt="image" src="https://github.com/user-attachments/assets/3a17b9f2-aab6-4df6-aa6e-dbd87fdd9328" />
+
+
 #### Configuration
 
 ```yaml
@@ -102,6 +112,11 @@ show_message: true
 
 Displays a single sensor value with optional progress bar visualization.
 
+#### Example
+
+<img width="578" height="487" alt="image" src="https://github.com/user-attachments/assets/36366375-9930-47d5-bf3c-b1e0e81d7637" />
+
+
 #### Configuration
 
 ```yaml
@@ -127,7 +142,12 @@ max: 100
 
 Interactive buttons for controlling entities or triggering services.
 
-#### Configuration
+#### Example
+
+<img width="629" height="458" alt="image" src="https://github.com/user-attachments/assets/4fb61bf7-8c01-4656-8877-359cbc410a40" />
+
+
+##### Configuration
 
 ```yaml
 type: custom:muthur-button-card
@@ -167,6 +187,11 @@ Button configuration:
 ### 4. Text Card
 
 Displays text messages in terminal format.
+
+#### Example
+
+<img width="586" height="515" alt="image" src="https://github.com/user-attachments/assets/a5349c6b-0ff5-4283-b95a-4a430dad8a65" />
+
 
 #### Configuration
 
@@ -302,18 +327,16 @@ These cards are inspired by:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Development Approach
+<img width="256" height="256" alt="Vibe Coding with GitHub Copilot 256x256" src="https://github.com/user-attachments/assets/bb41d075-6b3e-4f2b-a88e-94b2022b5d4f" />
+
+
 ## License
 
 MIT License - see LICENSE file for details
 
-## Credits
-
-Created by Loryan Strant
-
-Inspired by the Alien franchise © 20th Century Studios
-
-*"Building Better Worlds" - Weyland-Yutani Corporation*
-
 ---
 
-**Special Operations Division Clearance Required**
+**Note**: This is a fan-made theme inspired by the Alien franchise. Not affiliated with or endorsed by 20th Century Studios or Disney.
+
+**"Building Better Worlds"** - Weyland-Yutani Corporation
