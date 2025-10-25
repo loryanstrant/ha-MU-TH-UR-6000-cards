@@ -56,26 +56,12 @@ lovelace:
 
 ## Development
 
-### Local Development
-
 For local development and testing:
 
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Build the project: `npm run build`
 4. Open `test.html` in a browser to preview cards with mock data
-
-### Testing in Home Assistant (Devcontainer)
-
-For full Home Assistant testing with a devcontainer:
-
-1. Install Docker and VS Code with the "Dev Containers" extension
-2. Open this repository in VS Code
-3. Click "Reopen in Container" when prompted
-4. Home Assistant will be available at http://localhost:8123
-5. Cards are automatically mounted to `/local/mu-th-ur-6000-cards/`
-
-See [.devcontainer/README.md](.devcontainer/README.md) for detailed instructions and example configurations.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
