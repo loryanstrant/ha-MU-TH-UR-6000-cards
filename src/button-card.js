@@ -71,6 +71,7 @@ class MuthurButtonCard extends MuthurBaseCard {
 
         .button-icon {
           font-size: 1.2em;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .button-state {

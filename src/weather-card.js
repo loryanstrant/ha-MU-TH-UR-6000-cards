@@ -23,6 +23,7 @@ class MuthurWeatherCard extends MuthurBaseCard {
         .weather-icon {
           font-size: 4em;
           line-height: 1;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .weather-main {
@@ -114,6 +115,7 @@ class MuthurWeatherCard extends MuthurBaseCard {
         .forecast-icon {
           font-size: 2em;
           margin: 8px 0;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .forecast-temp {

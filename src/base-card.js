@@ -95,6 +95,12 @@ export const baseStyles = css`
   .status-error {
     background-color: #ff0000;
   }
+
+  /* Icon styling to align with green monochrome theme */
+  .muthur-icon {
+    filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
+    display: inline-block;
+  }
 `;
 
 export class MuthurBaseCard extends LitElement {

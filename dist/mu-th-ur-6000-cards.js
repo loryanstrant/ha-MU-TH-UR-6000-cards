@@ -113,6 +113,12 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
   .status-error {
     background-color: #ff0000;
   }
+
+  /* Icon styling to align with green monochrome theme */
+  .muthur-icon {
+    filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
+    display: inline-block;
+  }
 `;class ct extends at{static get properties(){return{hass:{type:Object},config:{type:Object}}}setConfig(t){if(!t)throw new Error("Invalid configuration");this.config=t}getCardSize(){return 3}}customElements.define("muthur-status-card",class extends ct{static get styles(){return[ot,a`
         .status-grid {
           display: grid;
@@ -365,6 +371,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
 
         .button-icon {
           font-size: 1.2em;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .button-state {
@@ -714,6 +721,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
         .glance-icon {
           font-size: 2em;
           margin-bottom: 8px;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .glance-state {
@@ -844,6 +852,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
 
         .light-icon {
           font-size: 2em;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .light-status {
@@ -1214,6 +1223,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
         .weather-icon {
           font-size: 4em;
           line-height: 1;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .weather-main {
@@ -1305,6 +1315,7 @@ const _=globalThis,w=_.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=
         .forecast-icon {
           font-size: 2em;
           margin: 8px 0;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .forecast-temp {

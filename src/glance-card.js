@@ -34,6 +34,7 @@ class MuthurGlanceCard extends MuthurBaseCard {
         .glance-icon {
           font-size: 2em;
           margin-bottom: 8px;
+          filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
         .glance-state {
