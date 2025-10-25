@@ -147,7 +147,7 @@ Interactive buttons for controlling entities or triggering services.
 <img width="629" height="458" alt="image" src="https://github.com/user-attachments/assets/4fb61bf7-8c01-4656-8877-359cbc410a40" />
 
 
-##### Configuration
+#### Configuration
 
 ```yaml
 type: custom:muthur-button-card
@@ -228,6 +228,10 @@ Displays a circular gauge visualization for numeric sensors with customizable th
 
 #### Example
 
+<img width="558" height="779" alt="image" src="https://github.com/user-attachments/assets/cf912c56-0908-46c7-95b4-3d46c1f42c13" />
+
+#### Configuration
+
 ```yaml
 type: custom:muthur-gauge-card
 entity: sensor.cpu_usage
@@ -258,10 +262,14 @@ Displays current time and date in terminal format with live updates.
 
 #### Example
 
+<img width="1175" height="472" alt="image" src="https://github.com/user-attachments/assets/ec8d433c-579d-4542-ab41-7f2c90f8a4b5" />
+
+#### Configuration
+
 ```yaml
 type: custom:muthur-clock-card
 title: SYSTEM TIME
-format_24h: true
+format_24h: false
 show_seconds: true
 show_date: true
 show_timezone: false
@@ -282,6 +290,11 @@ show_timezone: false
 Compact multi-entity overview card displaying multiple entities in a grid.
 
 #### Example
+
+<img width="1162" height="398" alt="image" src="https://github.com/user-attachments/assets/bc9eec89-4c9c-4405-90c4-0dc1fcb65a58" />
+
+
+#### Configuration
 
 ```yaml
 type: custom:muthur-glance-card
@@ -312,6 +325,11 @@ Dedicated light entity control with brightness slider and on/off toggle.
 
 #### Example
 
+<img width="575" height="500" alt="image" src="https://github.com/user-attachments/assets/6c4a8ad2-e44a-4f16-9027-46cb856b0260" />
+
+
+#### Configuration
+
 ```yaml
 type: custom:muthur-light-card
 entity: light.living_room
@@ -330,6 +348,10 @@ name: MAIN ILLUMINATION
 Display images or camera feeds with terminal-style filtering effects.
 
 #### Example
+
+<img width="565" height="790" alt="image" src="https://github.com/user-attachments/assets/a98cf2a8-fed1-4b15-9a22-663487d60499" />
+
+#### Configuration
 
 ```yaml
 type: custom:muthur-picture-card
@@ -358,6 +380,11 @@ show_timestamp: true
 Display weather information with current conditions and forecast.
 
 #### Example
+
+<img width="566" height="576" alt="image" src="https://github.com/user-attachments/assets/c726e12c-99e3-47de-b47f-fc506c16fa5a" />
+
+
+#### Configuration
 
 ```yaml
 type: custom:muthur-weather-card
