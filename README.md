@@ -6,6 +6,16 @@ A series of custom cards for Home Assistant based on the appearance of the MU/TH
 ![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-41BDF5?style=for-the-badge&logo=home-assistant)
 ![License](https://img.shields.io/badge/License-MIT-00ff41?style=for-the-badge)
 
+## Screenshots
+
+Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` for full-size images):
+
+<p align="center">
+  <img src="mother-examples/571172119_24915680594751279_2284237394664992206_n.jpg" width="30%" alt="Example 1">
+  <img src="mother-examples/571223280_24915666581419347_6254316241379552192_n.jpg" width="30%" alt="Example 2">
+  <img src="mother-examples/571776320_24915657118086960_2695871652407472305_n.jpg" width="30%" alt="Example 3">
+</p>
+
 ## Features
 
 - **Authentic Terminal Aesthetic**: Green monochrome display with CRT scanline effects
@@ -46,12 +56,26 @@ lovelace:
 
 ## Development
 
+### Local Development
+
 For local development and testing:
 
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Build the project: `npm run build`
 4. Open `test.html` in a browser to preview cards with mock data
+
+### Testing in Home Assistant (Devcontainer)
+
+For full Home Assistant testing with a devcontainer:
+
+1. Install Docker and VS Code with the "Dev Containers" extension
+2. Open this repository in VS Code
+3. Click "Reopen in Container" when prompted
+4. Home Assistant will be available at http://localhost:8123
+5. Cards are automatically mounted to `/local/mu-th-ur-6000-cards/`
+
+See [.devcontainer/README.md](.devcontainer/README.md) for detailed instructions and example configurations.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
@@ -203,6 +227,24 @@ All cards use CSS custom properties for easy theming:
 ```
 
 You can override these in your theme configuration.
+
+### Thedus Font (Optional)
+
+The project includes the **Thedus** font family for an even more authentic retro computer terminal look. The font files are included in the `fonts/` directory and can be enabled by importing the font stylesheet.
+
+To use the Thedus font, add it to your Home Assistant theme or override the font family:
+
+```css
+--muthur-font-family: 'Thedus', 'Courier New', monospace;
+```
+
+Available font variants:
+- `'Thedus'` - Condensed (default)
+- `'Thedus Wide'` - Wide variant
+- `'Thedus Stencil'` - Condensed stencil
+- `'Thedus Stencil Wide'` - Wide stencil
+
+The Thedus font provides an authentic retro computer terminal aesthetic that perfectly complements the MU/TH/UR 6000 design language. See `mother-examples/` for visual examples.
 
 ## Examples
 

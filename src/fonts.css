@@ -1,0 +1,61 @@
+/* Thedus Font Family - Authentic retro computer terminal font */
+/* Based on the Alien franchise aesthetic */
+
+@font-face {
+  font-family: 'Thedus';
+  src: url('./fonts/Thedus-Condensed.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Thedus';
+  src: url('./fonts/Thedus-CondensedLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Thedus Wide';
+  src: url('./fonts/Thedus-Wide.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Thedus Wide';
+  src: url('./fonts/Thedus-WideLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Thedus Stencil';
+  src: url('./fonts/Thedus-StencilCondensed.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Thedus Stencil Wide';
+  src: url('./fonts/Thedus-StencilWide.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Usage Note:
+   To use Thedus fonts in your cards, set the CSS custom property:
+   --muthur-font-family: 'Thedus', 'Courier New', monospace;
+   
+   Or use one of the variants:
+   - 'Thedus' (condensed)
+   - 'Thedus Wide'
+   - 'Thedus Stencil' (condensed stencil)
+   - 'Thedus Stencil Wide'
+*/
