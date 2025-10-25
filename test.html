@@ -105,14 +105,44 @@
       <muthur-sensor-card></muthur-sensor-card>
     </div>
 
+    <h2 class="section-title">&gt; Gauge Card</h2>
+    <div class="grid">
+      <muthur-gauge-card></muthur-gauge-card>
+    </div>
+
     <h2 class="section-title">&gt; Button Card</h2>
     <div class="grid">
       <muthur-button-card></muthur-button-card>
     </div>
 
+    <h2 class="section-title">&gt; Light Card</h2>
+    <div class="grid">
+      <muthur-light-card></muthur-light-card>
+    </div>
+
     <h2 class="section-title">&gt; Text Card</h2>
     <div class="grid">
       <muthur-text-card></muthur-text-card>
+    </div>
+
+    <h2 class="section-title">&gt; Clock Card</h2>
+    <div class="grid">
+      <muthur-clock-card></muthur-clock-card>
+    </div>
+
+    <h2 class="section-title">&gt; Glance Card</h2>
+    <div class="grid">
+      <muthur-glance-card></muthur-glance-card>
+    </div>
+
+    <h2 class="section-title">&gt; Picture Card</h2>
+    <div class="grid">
+      <muthur-picture-card></muthur-picture-card>
+    </div>
+
+    <h2 class="section-title">&gt; Weather Card</h2>
+    <div class="grid">
+      <muthur-weather-card></muthur-weather-card>
     </div>
 
     <div class="note">
@@ -180,6 +210,11 @@ content: |
 
     // Mock Home Assistant object for testing
     const mockHass = {
+      config: {
+        unit_system: {
+          temperature: '°C'
+        }
+      },
       states: {
         'sensor.temperature': {
           state: '22.5',
@@ -195,16 +230,51 @@ content: |
             unit_of_measurement: '%'
           }
         },
+        'sensor.cpu_usage': {
+          state: '67',
+          attributes: {
+            friendly_name: 'CPU Usage',
+            unit_of_measurement: '%'
+          }
+        },
         'binary_sensor.motion': {
           state: 'off',
           attributes: {
             friendly_name: 'Motion Sensor'
           }
         },
+        'binary_sensor.door': {
+          state: 'closed',
+          attributes: {
+            friendly_name: 'Door Sensor'
+          }
+        },
         'light.living_room': {
           state: 'on',
           attributes: {
-            friendly_name: 'Living Room Light'
+            friendly_name: 'Living Room Light',
+            brightness: 200,
+            supported_color_modes: ['brightness']
+          }
+        },
+        'weather.home': {
+          state: 'sunny',
+          attributes: {
+            friendly_name: 'Home Weather',
+            temperature: 22,
+            humidity: 65,
+            pressure: 1013,
+            wind_speed: 15,
+            wind_bearing: 180,
+            visibility: 10,
+            forecast: [
+              { datetime: '2025-10-26', condition: 'sunny', temperature: 24, templow: 18 },
+              { datetime: '2025-10-27', condition: 'partlycloudy', temperature: 23, templow: 17 },
+              { datetime: '2025-10-28', condition: 'cloudy', temperature: 20, templow: 15 },
+              { datetime: '2025-10-29', condition: 'rainy', temperature: 18, templow: 14 },
+              { datetime: '2025-10-30', condition: 'sunny', temperature: 22, templow: 16 }
+            ],
+            attribution: 'Data provided by Weather Service'
           }
         }
       },
@@ -273,6 +343,87 @@ content: |
           title: 'SYSTEM MESSAGE',
           content: 'ATTENTION: CREW MEMBERS\n\nTRANSMISSION RECEIVED FROM CORPORATE\nALL PERSONNEL REPORT TO BRIDGE\n\n- WEYLAND-YUTANI CORP',
           show_prompt: true
+        });
+      }
+
+      // Gauge Card
+      const gaugeCard = document.querySelector('muthur-gauge-card');
+      if (gaugeCard) {
+        gaugeCard.hass = mockHass;
+        gaugeCard.setConfig({
+          entity: 'sensor.cpu_usage',
+          name: 'CPU LOAD',
+          min: 0,
+          max: 100,
+          decimals: 0,
+          severity: {
+            yellow: 70,
+            red: 90
+          }
+        });
+      }
+
+      // Clock Card
+      const clockCard = document.querySelector('muthur-clock-card');
+      if (clockCard) {
+        clockCard.hass = mockHass;
+        clockCard.setConfig({
+          title: 'SYSTEM TIME',
+          format_24h: true,
+          show_seconds: true,
+          show_date: true,
+          show_timezone: false
+        });
+      }
+
+      // Glance Card
+      const glanceCard = document.querySelector('muthur-glance-card');
+      if (glanceCard) {
+        glanceCard.hass = mockHass;
+        glanceCard.setConfig({
+          title: 'SYSTEM OVERVIEW',
+          entities: [
+            'sensor.temperature',
+            'sensor.humidity',
+            'binary_sensor.motion',
+            'light.living_room'
+          ],
+          columns: 2,
+          show_name: true
+        });
+      }
+
+      // Light Card
+      const lightCard = document.querySelector('muthur-light-card');
+      if (lightCard) {
+        lightCard.hass = mockHass;
+        lightCard.setConfig({
+          entity: 'light.living_room',
+          name: 'MAIN ILLUMINATION'
+        });
+      }
+
+      // Picture Card
+      const pictureCard = document.querySelector('muthur-picture-card');
+      if (pictureCard) {
+        pictureCard.hass = mockHass;
+        pictureCard.setConfig({
+          title: 'VISUAL FEED',
+          image: 'https://via.placeholder.com/600x400/000000/00ff41?text=MU/TH/UR+6000+VISUAL+FEED',
+          caption: 'SURVEILLANCE CAMERA 01 - SECTOR 7-G',
+          show_timestamp: true
+        });
+      }
+
+      // Weather Card
+      const weatherCard = document.querySelector('muthur-weather-card');
+      if (weatherCard) {
+        weatherCard.hass = mockHass;
+        weatherCard.setConfig({
+          entity: 'weather.home',
+          name: 'ATMOSPHERIC CONDITIONS',
+          show_forecast: true,
+          forecast_days: 5
         });
       }
     });

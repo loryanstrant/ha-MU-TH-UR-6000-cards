@@ -24,7 +24,7 @@ Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` fo
 ## Features
 
 - **Authentic Terminal Aesthetic**: Green monochrome display with CRT scanline effects
-- **Multiple Card Types**: Status, Sensor, Button, and Text cards
+- **Multiple Card Types**: Status, Sensor, Button, Text, Gauge, Clock, Glance, Light, Picture, and Weather cards
 - **Retro Typography**: Classic monospace terminal font styling
 - **Weyland-Yutani Theme**: Compatible with the ha-weylandyutani theme
 - **Customizable**: Extensive configuration options for each card type
@@ -222,6 +222,160 @@ typing_effect: false
 | `show_prompt` | boolean | `true` | Show terminal prompt (>) |
 | `typing_effect` | boolean | `false` | Animated typing effect |
 
+### 5. Gauge Card
+
+Displays a circular gauge visualization for numeric sensors with customizable thresholds.
+
+#### Example
+
+```yaml
+type: custom:muthur-gauge-card
+entity: sensor.cpu_usage
+name: CPU LOAD
+min: 0
+max: 100
+decimals: 1
+severity:
+  yellow: 70
+  red: 90
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `entity` | string | **required** | Entity ID to display |
+| `name` | string | entity name | Custom display name |
+| `unit` | string | entity unit | Custom unit of measurement |
+| `min` | number | `0` | Minimum gauge value |
+| `max` | number | `100` | Maximum gauge value |
+| `decimals` | number | `1` | Number of decimal places |
+| `severity` | object | `{}` | Severity thresholds (yellow, red) |
+
+### 6. Clock Card
+
+Displays current time and date in terminal format with live updates.
+
+#### Example
+
+```yaml
+type: custom:muthur-clock-card
+title: SYSTEM TIME
+format_24h: true
+show_seconds: true
+show_date: true
+show_timezone: false
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | `SYSTEM TIME` | Card header text |
+| `format_24h` | boolean | `true` | Use 24-hour time format |
+| `show_seconds` | boolean | `true` | Display seconds |
+| `show_date` | boolean | `true` | Display date |
+| `show_timezone` | boolean | `false` | Display timezone |
+
+### 7. Glance Card
+
+Compact multi-entity overview card displaying multiple entities in a grid.
+
+#### Example
+
+```yaml
+type: custom:muthur-glance-card
+title: SYSTEM OVERVIEW
+entities:
+  - entity: sensor.temperature
+    name: TEMP
+  - entity: sensor.humidity
+    name: HUMIDITY
+  - binary_sensor.motion
+  - light.living_room
+columns: 2
+show_name: true
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | `SYSTEM GLANCE` | Card header text |
+| `entities` | list | **required** | List of entities to display |
+| `columns` | number | auto | Number of columns (2-5) |
+| `show_name` | boolean | `true` | Show entity names |
+
+### 8. Light Card
+
+Dedicated light entity control with brightness slider and on/off toggle.
+
+#### Example
+
+```yaml
+type: custom:muthur-light-card
+entity: light.living_room
+name: MAIN ILLUMINATION
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `entity` | string | **required** | Light entity ID |
+| `name` | string | entity name | Custom display name |
+
+### 9. Picture Card
+
+Display images or camera feeds with terminal-style filtering effects.
+
+#### Example
+
+```yaml
+type: custom:muthur-picture-card
+title: VISUAL FEED
+entity: camera.front_door
+# OR use a static image
+image: /local/my-image.jpg
+caption: SURVEILLANCE CAMERA 01
+show_timestamp: true
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | `VISUAL FEED` | Card header text |
+| `entity` | string | optional | Camera entity ID |
+| `image` | string | optional | Static image URL |
+| `caption` | string | optional | Image caption |
+| `show_timestamp` | boolean | `false` | Show capture timestamp |
+
+**Note**: Either `entity` or `image` must be provided.
+
+### 10. Weather Card
+
+Display weather information with current conditions and forecast.
+
+#### Example
+
+```yaml
+type: custom:muthur-weather-card
+entity: weather.home
+name: ATMOSPHERIC CONDITIONS
+show_forecast: true
+forecast_days: 5
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `entity` | string | **required** | Weather entity ID |
+| `name` | string | entity name | Custom display name |
+| `show_forecast` | boolean | `true` | Show weather forecast |
+| `forecast_days` | number | `5` | Number of forecast days |
+
 ## Styling
 
 All cards use CSS custom properties for easy theming:
@@ -307,6 +461,82 @@ cards:
     name: HUMIDITY
     show_graph: true
     max: 100
+```
+
+### System Monitoring
+
+```yaml
+type: vertical-stack
+cards:
+  - type: custom:muthur-clock-card
+    title: SYSTEM TIME
+    show_seconds: true
+    show_date: true
+    
+  - type: horizontal-stack
+    cards:
+      - type: custom:muthur-gauge-card
+        entity: sensor.cpu_usage
+        name: CPU LOAD
+        min: 0
+        max: 100
+        severity:
+          yellow: 70
+          red: 90
+      
+      - type: custom:muthur-gauge-card
+        entity: sensor.memory_usage
+        name: MEMORY
+        min: 0
+        max: 100
+        severity:
+          yellow: 80
+          red: 95
+  
+  - type: custom:muthur-glance-card
+    title: SYSTEM STATUS
+    entities:
+      - sensor.cpu_temperature
+      - sensor.disk_use_percent
+      - binary_sensor.internet_connection
+      - switch.backup_system
+    columns: 4
+```
+
+### Surveillance & Weather
+
+```yaml
+type: vertical-stack
+cards:
+  - type: custom:muthur-picture-card
+    title: EXTERIOR SURVEILLANCE
+    entity: camera.front_door
+    caption: MAIN ENTRANCE - SECTOR A
+    show_timestamp: true
+    
+  - type: custom:muthur-weather-card
+    entity: weather.home
+    name: ATMOSPHERIC CONDITIONS
+    show_forecast: true
+    forecast_days: 5
+```
+
+### Lighting Control
+
+```yaml
+type: horizontal-stack
+cards:
+  - type: custom:muthur-light-card
+    entity: light.living_room
+    name: LIVING QUARTERS
+    
+  - type: custom:muthur-light-card
+    entity: light.bedroom
+    name: SLEEP CHAMBER
+    
+  - type: custom:muthur-light-card
+    entity: light.kitchen
+    name: GALLEY
 ```
 
 ## Design Inspiration

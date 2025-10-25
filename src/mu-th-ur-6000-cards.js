@@ -5,6 +5,12 @@ import './status-card.js';
 import './sensor-card.js';
 import './button-card.js';
 import './text-card.js';
+import './gauge-card.js';
+import './clock-card.js';
+import './glance-card.js';
+import './light-card.js';
+import './picture-card.js';
+import './weather-card.js';
 
 // Register cards with Home Assistant
 window.customCards = window.customCards || [];
@@ -30,6 +36,42 @@ window.customCards.push({
   type: 'muthur-text-card',
   name: 'MU/TH/UR 6000 Text Card',
   description: 'Display text messages in terminal format',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-gauge-card',
+  name: 'MU/TH/UR 6000 Gauge Card',
+  description: 'Display gauge visualization for numeric sensors',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-clock-card',
+  name: 'MU/TH/UR 6000 Clock Card',
+  description: 'Display current time in terminal format',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-glance-card',
+  name: 'MU/TH/UR 6000 Glance Card',
+  description: 'Compact multi-entity overview in terminal style',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-light-card',
+  name: 'MU/TH/UR 6000 Light Card',
+  description: 'Control lights with terminal-style interface',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-picture-card',
+  name: 'MU/TH/UR 6000 Picture Card',
+  description: 'Display images and camera feeds in terminal style',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-weather-card',
+  name: 'MU/TH/UR 6000 Weather Card',
+  description: 'Display weather information in terminal format',
   preview: true,
 });
 
