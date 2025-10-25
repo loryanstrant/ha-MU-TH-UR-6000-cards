@@ -1,0 +1,38 @@
+{
+  "name": "ha-mu-th-ur-6000-cards",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A series of cards for Home Assistant based on the appearance of MU/TH/UR 6000 in the Alien movies",
+  "main": "dist/mu-th-ur-6000-cards.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "lint": "eslint src/**/*.js"
+  },
+  "keywords": [
+    "home-assistant",
+    "custom-card",
+    "alien",
+    "mu-th-ur-6000",
+    "weyland-yutani"
+  ],
+  "author": "Loryan Strant",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^8.52.0",
+    "rollup": "^4.1.4"
+  },
+  "dependencies": {
+    "lit": "^3.0.0"
+  }
+}
