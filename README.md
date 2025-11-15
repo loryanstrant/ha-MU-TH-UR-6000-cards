@@ -24,10 +24,14 @@ Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` fo
 ## Features
 
 - **Authentic Terminal Aesthetic**: Green monochrome display with CRT scanline effects
-- **Multiple Card Types**: Status, Sensor, Button, Text, Gauge, Clock, Glance, Light, Picture, and Weather cards
+- **Multiple Card Types**: Status, Sensor, Button, Text, Gauge, Clock, Glance, Light, Picture, Weather, and Alarm cards
 - **Retro Typography**: Classic monospace terminal font styling
 - **Weyland-Yutani Theme**: Compatible with the ha-weylandyutani theme
 - **Customizable**: Extensive configuration options for each card type
+- **Advanced Interactions**: tap_action support for navigation, services, and more
+- **Dynamic Content**: State-based text display with template variables
+- **Auto-Refresh**: Camera feed auto-update capability
+- **Color Themes**: Red and yellow variants for warnings and alerts
 - **Lightweight**: Built with Lit for optimal performance
 
 ## Installation
@@ -107,6 +111,9 @@ show_message: true
 | `entities` | list | **required** | List of entities to display |
 | `message` | string | `ALL SYSTEMS OPERATIONAL` | System status message |
 | `show_message` | boolean | `true` | Show/hide the status message |
+| `theme` | string | `green` | Color theme: `green`, `red`, `yellow` |
+
+The `theme` option allows you to change the card's color scheme. Use `red` for warnings/errors or `yellow` for caution states.
 
 ### 2. Sensor Card
 
@@ -179,10 +186,45 @@ Button configuration:
 - `entity`: Entity to control
 - `name`: Button label
 - `icon`: Optional icon/emoji
-- `action`: Action to perform (toggle, turn_on, turn_off)
+- `action`: Action to perform (toggle, turn_on, turn_off) - deprecated, use `tap_action` instead
 - `show_state`: Display entity state
 - `service`: Alternative service call (instead of entity)
 - `service_data`: Data for service call
+- `tap_action`: Advanced action configuration (see below)
+
+**Tap Action Configuration:**
+
+The `tap_action` option provides advanced interaction capabilities:
+
+```yaml
+buttons:
+  - name: NAVIGATION
+    tap_action:
+      action: navigate
+      navigation_path: /lovelace/security
+  - name: MORE INFO
+    entity: light.living_room
+    tap_action:
+      action: more-info
+  - name: EXTERNAL
+    tap_action:
+      action: url
+      url_path: https://example.com
+  - name: SERVICE
+    tap_action:
+      action: call-service
+      service: script.turn_on
+      service_data:
+        entity_id: script.my_script
+```
+
+Available tap actions:
+- `navigate`: Navigate to a Home Assistant view
+- `url`: Open external URL in new tab
+- `more-info`: Show entity more-info dialog
+- `call-service`: Call any Home Assistant service
+- `toggle`: Toggle entity state
+- `none`: No action
 
 ### 4. Text Card
 
@@ -216,11 +258,53 @@ typing_effect: false
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `title` | string | `MESSAGE` | Card header text |
-| `content` | string | **required** | Text content to display |
+| `content` | string | **required** | Text content to display (or default if using `state_content`) |
+| `entity` | string | optional | Entity to monitor for dynamic content |
+| `state_content` | object | optional | State-specific content mapping |
 | `size` | string | `medium` | Text size (small, medium, large) |
 | `align` | string | `left` | Text alignment (left, center, right) |
 | `show_prompt` | boolean | `true` | Show terminal prompt (>) |
 | `typing_effect` | boolean | `false` | Animated typing effect |
+
+**Dynamic Content Based on Entity State:**
+
+You can display different messages based on an entity's state:
+
+```yaml
+type: custom:muthur-text-card
+title: SECURITY STATUS
+entity: alarm_control_panel.home
+state_content:
+  disarmed: |
+    SYSTEM DISARMED
+    ALL ZONES INACTIVE
+  armed_away: |
+    ALERT: SYSTEM ARMED
+    PERIMETER SECURED
+  triggered: |
+    ⚠ ALARM TRIGGERED ⚠
+    SECURITY BREACH DETECTED
+  default: SYSTEM STATUS UNKNOWN
+```
+
+**Template Variables:**
+
+Use template variables in your content:
+- `{{state}}` - Entity state value
+- `{{friendly_name}}` - Entity friendly name
+- `{{unit}}` - Unit of measurement
+- `{{attribute.name}}` - Any entity attribute
+
+Example:
+```yaml
+type: custom:muthur-text-card
+title: TEMPERATURE MONITOR
+entity: sensor.living_room_temperature
+content: |
+  LOCATION: {{friendly_name}}
+  CURRENT READING: {{state}}{{unit}}
+  STATUS: {{attribute.device_class}}
+```
 
 ### 5. Gauge Card
 
@@ -372,8 +456,24 @@ show_timestamp: true
 | `image` | string | optional | Static image URL |
 | `caption` | string | optional | Image caption |
 | `show_timestamp` | boolean | `false` | Show capture timestamp |
+| `camera_refresh_interval` | number | `0` | Auto-refresh interval in seconds (0 = disabled) |
 
 **Note**: Either `entity` or `image` must be provided.
+
+**Auto-Refresh for Camera Feeds:**
+
+Enable automatic camera feed updates by setting `camera_refresh_interval`:
+
+```yaml
+type: custom:muthur-picture-card
+title: SURVEILLANCE FEED
+entity: camera.front_door
+caption: MAIN ENTRANCE
+show_timestamp: true
+camera_refresh_interval: 5  # Refresh every 5 seconds
+```
+
+The refresh is automatically managed - it starts when the card is loaded and stops when removed from view.
 
 ### 10. Weather Card
 
@@ -402,6 +502,45 @@ forecast_days: 5
 | `name` | string | entity name | Custom display name |
 | `show_forecast` | boolean | `true` | Show weather forecast |
 | `forecast_days` | number | `5` | Number of forecast days |
+
+### 11. Alarm Card
+
+Control alarm systems with a terminal-style keypad interface. Works with Alarmo and standard Home Assistant alarm integrations.
+
+#### Configuration
+
+```yaml
+type: custom:muthur-alarm-card
+title: SECURITY SYSTEM
+entity: alarm_control_panel.home
+show_keypad: true
+```
+
+#### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | `SECURITY SYSTEM` | Card header text |
+| `entity` | string | **required** | alarm_control_panel entity ID |
+| `show_keypad` | boolean | `true` | Show numeric keypad |
+
+#### Features
+
+- **Visual State Indicators**: 
+  - Green display when disarmed
+  - Red display when armed (away, home, night, etc.)
+  - Yellow display during pending/arming states
+  - Flashing red display when triggered
+- **Numeric Keypad**: 0-9 digits, CLR (clear), and OK buttons
+- **Quick Actions**: 
+  - ARM AWAY and ARM HOME buttons when disarmed
+  - DISARM button when armed
+- **Code Entry**: Masked display showing dots for entered digits
+- **Error Handling**: Clear feedback for invalid codes
+
+#### Security Note
+
+The keypad supports optional code requirements based on your alarm panel configuration. Some systems require codes only for disarming, while others may require them for arming as well.
 
 ## Styling
 

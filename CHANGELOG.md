@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-15
+
+### Added
+- **Alarm Card**: New dedicated card for alarm_control_panel entities with terminal-style keypad
+  - Numeric keypad (0-9, CLR, OK buttons)
+  - ARM AWAY/HOME quick action buttons
+  - Visual state indicators (green/red/yellow/flashing)
+  - Code entry with masked display
+  - Error feedback for invalid codes
+- **Button Card - tap_action Support**: Advanced interaction capabilities
+  - Navigate to Home Assistant views
+  - Open external URLs
+  - Show more-info dialogs
+  - Call any service
+  - Full backward compatibility with existing configurations
+- **Status Card - Theme Variants**: Color scheme options for different contexts
+  - Red theme for warnings/errors
+  - Yellow theme for caution states
+  - Original green theme (default)
+- **Picture Card - Auto-Refresh**: Automatic camera feed updates
+  - Configurable refresh interval
+  - Automatic cache-busting for camera images
+  - Proper lifecycle management
+- **Text Card - Dynamic Content**: State-based text display
+  - Display different messages based on entity state
+  - Template variable replacement ({{state}}, {{friendly_name}}, {{unit}}, {{attribute.name}})
+  - Fallback to default content
+
+### Changed
+- Updated README with comprehensive documentation for all new features
+- Enhanced card registration system to include new alarm card
+
+### Fixed
+- Improved error handling in alarm card service calls
+
 ## [1.0.0] - 2025-10-25
 
 ### Added
@@ -32,4 +67,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Classic CRT terminal aesthetics
 - Weyland-Yutani Corporation design language
 
+[1.1.0]: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/releases/tag/v1.0.0
