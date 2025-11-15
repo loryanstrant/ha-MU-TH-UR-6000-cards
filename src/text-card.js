@@ -67,11 +67,31 @@ class MuthurTextCard extends MuthurBaseCard {
     }
 
     const title = this.config.title || 'MESSAGE';
-    const content = this.config.content || '';
     const size = this.config.size || 'medium';
     const align = this.config.align || 'left';
     const showPrompt = this.config.show_prompt !== false;
     const typingEffect = this.config.typing_effect === true;
+
+    // Determine content based on entity state if entity and state_content are defined
+    let content = this.config.content || '';
+    
+    if (this.config.entity && this.config.state_content && this.hass) {
+      const entity = this.hass.states[this.config.entity];
+      if (entity) {
+        const state = entity.state;
+        
+        // Check if there's a specific content for this state
+        if (this.config.state_content[state]) {
+          content = this.config.state_content[state];
+        } else if (this.config.state_content.default) {
+          // Fall back to default if provided
+          content = this.config.state_content.default;
+        }
+        
+        // Replace template variables in content
+        content = this._replaceTemplates(content, entity);
+      }
+    }
 
     const contentClass = `text-content text-${size} text-${align}`;
     const promptClass = showPrompt ? 'terminal-prompt' : '';
@@ -92,6 +112,32 @@ class MuthurTextCard extends MuthurBaseCard {
     `;
   }
 
+  _replaceTemplates(content, entity) {
+    if (!content || !entity) return content;
+    
+    let result = content;
+    
+    // Replace {{state}} with entity state
+    result = result.replace(/\{\{state\}\}/g, entity.state);
+    
+    // Replace {{friendly_name}} with entity friendly name
+    if (entity.attributes.friendly_name) {
+      result = result.replace(/\{\{friendly_name\}\}/g, entity.attributes.friendly_name);
+    }
+    
+    // Replace {{unit}} with unit of measurement
+    if (entity.attributes.unit_of_measurement) {
+      result = result.replace(/\{\{unit\}\}/g, entity.attributes.unit_of_measurement);
+    }
+    
+    // Replace any other attribute with {{attribute.name}} syntax
+    result = result.replace(/\{\{attribute\.(\w+)\}\}/g, (match, attrName) => {
+      return entity.attributes[attrName] || match;
+    });
+    
+    return result;
+  }
+
   static getConfigElement() {
     return document.createElement('muthur-text-card-editor');
   }
@@ -100,6 +146,8 @@ class MuthurTextCard extends MuthurBaseCard {
     return {
       title: 'MESSAGE',
       content: 'ENTER YOUR MESSAGE HERE',
+      entity: '',
+      state_content: {},
       size: 'medium',
       align: 'left',
       show_prompt: true,
