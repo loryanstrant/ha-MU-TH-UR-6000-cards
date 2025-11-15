@@ -11,6 +11,7 @@ import './glance-card.js';
 import './light-card.js';
 import './picture-card.js';
 import './weather-card.js';
+import './alarm-card.js';
 
 // Register cards with Home Assistant
 window.customCards = window.customCards || [];
@@ -72,6 +73,12 @@ window.customCards.push({
   type: 'muthur-weather-card',
   name: 'MU/TH/UR 6000 Weather Card',
   description: 'Display weather information in terminal format',
+  preview: true,
+});
+window.customCards.push({
+  type: 'muthur-alarm-card',
+  name: 'MU/TH/UR 6000 Alarm Card',
+  description: 'Control alarm systems with terminal-style keypad',
   preview: true,
 });
 
