@@ -211,6 +211,7 @@ class MuthurPictureCard extends MuthurBaseCard {
       } else {
         // Entity exists but has no entity_picture, or entity doesn't exist
         this._error = true;
+        this._imageUrl = "";
       }
     } else if (this.config.image) {
       // Static image URL
