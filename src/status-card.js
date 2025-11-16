@@ -167,7 +167,7 @@ class MuthurStatusCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-status-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {

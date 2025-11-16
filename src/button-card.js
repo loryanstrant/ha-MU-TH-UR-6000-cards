@@ -115,9 +115,9 @@ class MuthurButtonCard extends MuthurBaseCard {
   }
 
   renderButton(buttonConfig) {
-    const entity = buttonConfig.entity ? this.hass.states[buttonConfig.entity] : null;
-    const name = buttonConfig.name || (entity ? entity.attributes.friendly_name : 'Button');
-    const icon = buttonConfig.icon || (entity ? entity.attributes.icon : null);
+    const entity = buttonConfig.entity ? this.hass?.states[buttonConfig.entity] : null;
+    const name = buttonConfig.name || entity?.attributes?.friendly_name || 'Button';
+    const icon = buttonConfig.icon || entity?.attributes?.icon || null;
     const showState = buttonConfig.show_state !== false;
 
     return html`
@@ -242,7 +242,7 @@ class MuthurButtonCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-button-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {
