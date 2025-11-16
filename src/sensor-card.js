@@ -153,7 +153,7 @@ class MuthurSensorCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-sensor-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {
