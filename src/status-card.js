@@ -50,6 +50,44 @@ class MuthurStatusCard extends MuthurBaseCard {
           font-family: var(--muthur-font-family);
           line-height: 1.6;
         }
+
+        /* Red/Warning theme styles */
+        .card.theme-red {
+          --muthur-primary-color: #ff0000;
+          --muthur-secondary-color: #8f0000;
+          --muthur-border-color: #ff0000;
+          --muthur-text-color: #ff0000;
+          --muthur-glow-color: rgba(255, 0, 0, 0.5);
+        }
+
+        .card.theme-red .status-item {
+          background-color: rgba(255, 0, 0, 0.05);
+          border-left-color: #ff0000;
+        }
+
+        .card.theme-red .system-status {
+          border-color: #8f0000;
+          background-color: rgba(255, 0, 0, 0.03);
+        }
+
+        /* Yellow/Caution theme styles */
+        .card.theme-yellow {
+          --muthur-primary-color: #ffff00;
+          --muthur-secondary-color: #8f8f00;
+          --muthur-border-color: #ffff00;
+          --muthur-text-color: #ffff00;
+          --muthur-glow-color: rgba(255, 255, 0, 0.5);
+        }
+
+        .card.theme-yellow .status-item {
+          background-color: rgba(255, 255, 0, 0.05);
+          border-left-color: #ffff00;
+        }
+
+        .card.theme-yellow .system-status {
+          border-color: #8f8f00;
+          background-color: rgba(255, 255, 0, 0.03);
+        }
       `,
     ];
   }
@@ -62,9 +100,11 @@ class MuthurStatusCard extends MuthurBaseCard {
     const entities = this.config.entities || [];
     const title = this.config.title || 'SYSTEM STATUS';
     const message = this.config.message || 'ALL SYSTEMS OPERATIONAL';
+    const theme = this.config.theme || 'green'; // green, red, yellow
+    const themeClass = theme !== 'green' ? `theme-${theme}` : '';
 
     return html`
-      <div class="card">
+      <div class="card ${themeClass}">
         <div class="card-content">
           <div class="card-header">${title}</div>
           
@@ -135,7 +175,8 @@ class MuthurStatusCard extends MuthurBaseCard {
       entities: [],
       title: 'SYSTEM STATUS',
       message: 'ALL SYSTEMS OPERATIONAL',
-      show_message: true
+      show_message: true,
+      theme: 'green'
     };
   }
 }

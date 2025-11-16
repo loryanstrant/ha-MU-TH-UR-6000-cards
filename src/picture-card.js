@@ -141,6 +141,7 @@ class MuthurPictureCard extends MuthurBaseCard {
       _imageUrl: { type: String },
       _loading: { type: Boolean },
       _error: { type: Boolean },
+      _refreshTimer: { type: Number },
     };
   }
 
@@ -149,13 +150,50 @@ class MuthurPictureCard extends MuthurBaseCard {
     this._imageUrl = '';
     this._loading = false;
     this._error = false;
+    this._refreshTimer = null;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._startAutoRefresh();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._stopAutoRefresh();
   }
 
   updated(changedProperties) {
     super.updated(changedProperties);
     
+    if (changedProperties.has('config')) {
+      this._stopAutoRefresh();
+      this._startAutoRefresh();
+    }
+    
     if (changedProperties.has('config') || changedProperties.has('hass')) {
       this._updateImage();
+    }
+  }
+
+  _startAutoRefresh() {
+    if (!this.config || !this.config.entity) return;
+    
+    const refreshInterval = this.config.camera_refresh_interval;
+    
+    // Only start auto-refresh if camera_refresh_interval is set and positive
+    if (refreshInterval && refreshInterval > 0) {
+      this._stopAutoRefresh(); // Clear any existing timer
+      this._refreshTimer = setInterval(() => {
+        this._updateImage();
+      }, refreshInterval * 1000); // Convert seconds to milliseconds
+    }
+  }
+
+  _stopAutoRefresh() {
+    if (this._refreshTimer) {
+      clearInterval(this._refreshTimer);
+      this._refreshTimer = null;
     }
   }
 
@@ -166,7 +204,9 @@ class MuthurPictureCard extends MuthurBaseCard {
       // Camera entity
       const entity = this.hass.states[this.config.entity];
       if (entity && entity.attributes.entity_picture) {
-        this._imageUrl = entity.attributes.entity_picture;
+        // Add cache-busting parameter to force refresh
+        const baseUrl = entity.attributes.entity_picture.split('?')[0];
+        this._imageUrl = `${baseUrl}?t=${Date.now()}`;
         this._error = false;
       }
     } else if (this.config.image) {
@@ -302,7 +342,8 @@ class MuthurPictureCard extends MuthurBaseCard {
       entity: '',
       image: '',
       caption: '',
-      show_timestamp: false
+      show_timestamp: false,
+      camera_refresh_interval: 0
     };
   }
 }

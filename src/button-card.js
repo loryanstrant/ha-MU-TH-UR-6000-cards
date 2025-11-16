@@ -139,6 +139,13 @@ class MuthurButtonCard extends MuthurBaseCard {
   }
 
   handleButtonClick(buttonConfig) {
+    // Handle tap_action if defined
+    if (buttonConfig.tap_action) {
+      this.handleAction(buttonConfig.tap_action, buttonConfig.entity);
+      return;
+    }
+
+    // Legacy behavior for backward compatibility
     if (buttonConfig.entity) {
       const serviceName = (buttonConfig.action || 'toggle').split('.')[1] || 'toggle';
       const entityDomain = buttonConfig.entity.split('.')[0];
@@ -157,6 +164,73 @@ class MuthurButtonCard extends MuthurBaseCard {
         service,
         buttonConfig.service_data || {}
       );
+    }
+  }
+
+  handleAction(action, entityId) {
+    const actionType = action.action || 'toggle';
+
+    switch (actionType) {
+    case 'navigate':
+      if (action.navigation_path) {
+        window.history.pushState(null, '', action.navigation_path);
+        window.dispatchEvent(new CustomEvent('location-changed'));
+      }
+      break;
+
+    case 'url':
+      if (action.url_path) {
+        window.open(action.url_path, '_blank');
+      }
+      break;
+
+    case 'more-info':
+      {
+        const moreInfoEntityId = action.entity || entityId;
+        if (moreInfoEntityId) {
+          const event = new Event('hass-more-info', {
+            bubbles: true,
+            composed: true,
+          });
+          event.detail = { entityId: moreInfoEntityId };
+          this.dispatchEvent(event);
+        }
+      }
+      break;
+
+    case 'call-service':
+      if (action.service) {
+        const [domain, service] = action.service.split('.');
+        this.hass.callService(
+          domain,
+          service,
+          action.service_data || {}
+        );
+      }
+      break;
+
+    case 'toggle':
+      if (entityId) {
+        const entityDomain = entityId.split('.')[0];
+        this.hass.callService(entityDomain, 'toggle', {
+          entity_id: entityId
+        });
+      }
+      break;
+
+    case 'none':
+      // Do nothing
+      break;
+
+    default:
+      // For other actions (turn_on, turn_off, etc.)
+      if (entityId) {
+        const entityDomain = entityId.split('.')[0];
+        this.hass.callService(entityDomain, actionType, {
+          entity_id: entityId
+        });
+      }
+      break;
     }
   }
 
