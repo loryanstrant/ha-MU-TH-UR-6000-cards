@@ -203,10 +203,12 @@ class MuthurPictureCard extends MuthurBaseCard {
     if (this.config.entity) {
       // Camera entity
       const entity = this.hass.states[this.config.entity];
+      
       if (entity && entity.attributes.entity_picture) {
-        // Add cache-busting parameter to force refresh
-        const baseUrl = entity.attributes.entity_picture.split('?')[0];
-        this._imageUrl = `${baseUrl}?t=${Date.now()}`;
+        // Add cache-busting parameter while preserving existing token
+        const entityPicture = entity.attributes.entity_picture;
+        const separator = entityPicture.includes('?') ? '&' : '?';
+        this._imageUrl = `${entityPicture}${separator}t=${Date.now()}`;
         this._error = false;
       } else {
         // Entity exists but has no entity_picture, or entity doesn't exist
