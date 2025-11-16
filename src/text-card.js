@@ -31,6 +31,7 @@ class MuthurTextCard extends MuthurBaseCard {
 
         .text-left {
           text-align: left;
+          word-wrap: break-word;
         }
 
         .text-center {

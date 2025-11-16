@@ -98,7 +98,7 @@ class MuthurClockCard extends MuthurBaseCard {
     const timeFormat = {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: this.config?.format_12h || false
+      hour12: !(this.config?.format_24h !== false)
     };
     
     if (showSeconds) {
