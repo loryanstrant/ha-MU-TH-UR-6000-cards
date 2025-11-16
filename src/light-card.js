@@ -274,7 +274,7 @@ class MuthurLightCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-light-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {

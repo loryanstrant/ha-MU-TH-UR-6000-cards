@@ -320,7 +320,7 @@ class MuthurWeatherCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-weather-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {

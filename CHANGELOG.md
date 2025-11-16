@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-11-16
+
+### Fixed
+- **Alarm Card**: Corrected Home Assistant service names from `alarm_armed_away`/`alarm_armed_home` to `alarm_arm_away`/`alarm_arm_home`
+- **Text Card**: Fixed multi-line text display and alignment issues
+  - Added explicit `.text-left` class for proper left alignment
+  - Added `word-wrap: break-word` to handle long text properly
+  - Clarified that typing effect intentionally uses single-line display
+- **Picture Card**: Fixed image display logic
+  - Properly set error flag when entity has no `entity_picture` attribute
+  - Ensured static images (config.image) work correctly
+- **Button Card**: Fixed entity friendly name retrieval using optional chaining
+- **Config Editor Errors**: Fixed "this._configElement.setConfig is not a function" error on all 11 cards
+  - All cards now return `undefined` from `getConfigElement()` instead of creating non-existent editor elements
+  - Affects: status, sensor, button, text, gauge, clock, glance, light, picture, weather, and alarm cards
+
 ## [1.1.0] - 2025-11-15
 
 ### Added
@@ -67,5 +83,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Classic CRT terminal aesthetics
 - Weyland-Yutani Corporation design language
 
+[1.1.1]: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/releases/tag/v1.0.0

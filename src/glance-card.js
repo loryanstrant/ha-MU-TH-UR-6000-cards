@@ -6,29 +6,40 @@ class MuthurGlanceCard extends MuthurBaseCard {
     return [
       baseStyles,
       css`
-        .glance-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap: 12px;
+        .glance-container {
           padding: 8px 0;
         }
 
+        .glance-grid {
+          display: grid;
+          gap: 12px;
+        }
+
+        .glance-grid-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .glance-grid-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .glance-grid-4 {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
         .glance-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
           padding: 16px 12px;
           background-color: rgba(0, 255, 65, 0.05);
           border: 1px solid var(--muthur-secondary-color);
+          text-align: center;
           cursor: pointer;
           transition: all 0.3s ease;
-          position: relative;
         }
 
         .glance-item:hover {
           background-color: rgba(0, 255, 65, 0.1);
-          border-color: var(--muthur-border-color);
           box-shadow: 0 0 10px var(--muthur-glow-color);
+          border-color: var(--muthur-primary-color);
         }
 
         .glance-icon {
@@ -37,53 +48,28 @@ class MuthurGlanceCard extends MuthurBaseCard {
           filter: grayscale(100%) brightness(1.2) sepia(100%) hue-rotate(60deg) saturate(5);
         }
 
-        .glance-state {
-          font-size: 1.4em;
-          font-weight: bold;
-          margin: 4px 0;
-          font-family: var(--muthur-font-family);
-          text-shadow: 0 0 5px var(--muthur-glow-color);
-        }
-
-        .glance-unit {
-          font-size: 0.7em;
-          margin-left: 2px;
-          opacity: 0.8;
-        }
-
         .glance-name {
           font-size: 0.75em;
           text-transform: uppercase;
           letter-spacing: 1px;
-          text-align: center;
-          margin-top: 4px;
+          margin-bottom: 8px;
           opacity: 0.9;
         }
 
-        .glance-indicator {
-          position: absolute;
-          top: 8px;
-          right: 8px;
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          box-shadow: 0 0 5px currentColor;
+        .glance-state {
+          font-size: 1.1em;
+          font-weight: bold;
+          font-family: var(--muthur-font-family);
         }
 
-        .columns-2 {
-          grid-template-columns: repeat(2, 1fr);
+        .glance-unit {
+          font-size: 0.8em;
+          opacity: 0.7;
+          margin-left: 4px;
         }
 
-        .columns-3 {
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .columns-4 {
-          grid-template-columns: repeat(4, 1fr);
-        }
-
-        .columns-5 {
-          grid-template-columns: repeat(5, 1fr);
+        .glance-unavailable {
+          opacity: 0.5;
         }
       `,
     ];
@@ -94,108 +80,69 @@ class MuthurGlanceCard extends MuthurBaseCard {
       return html``;
     }
 
-    const title = this.config.title || 'SYSTEM GLANCE';
+    const title = this.config.title || 'SYSTEM OVERVIEW';
     const entities = this.config.entities || [];
-    const columns = this.config.columns;
-    const showName = this.config.show_name !== false;
-
-    let gridClass = '';
-    if (columns && columns >= 2 && columns <= 5) {
-      gridClass = `columns-${columns}`;
-    }
+    const columns = this.config.columns || 3;
+    const gridClass = `glance-grid-${Math.min(Math.max(columns, 2), 4)}`;
 
     return html`
       <div class="card">
         <div class="card-content">
           <div class="card-header">${title}</div>
           
-          <div class="glance-grid ${gridClass}">
-            ${entities.map(entityConf => this.renderEntity(entityConf, showName))}
+          <div class="glance-container">
+            <div class="glance-grid ${gridClass}">
+              ${entities.map(entityConf => this._renderEntity(entityConf))}
+            </div>
           </div>
         </div>
       </div>
     `;
   }
 
-  renderEntity(entityConf, showName) {
+  _renderEntity(entityConf) {
     const entityId = typeof entityConf === 'string' ? entityConf : entityConf.entity;
     const entity = this.hass.states[entityId];
     
     if (!entity) {
       return html`
-        <div class="glance-item">
-          <div class="glance-state">N/A</div>
-          ${showName ? html`<div class="glance-name">${entityId}</div>` : ''}
+        <div class="glance-item glance-unavailable">
+          <div class="glance-name">${entityId}</div>
+          <div class="glance-state">UNAVAILABLE</div>
         </div>
       `;
     }
 
     const name = (typeof entityConf === 'object' && entityConf.name) || 
-                 entity.attributes.friendly_name || entityId;
+                 entity.attributes.friendly_name || 
+                 entityId;
     const icon = (typeof entityConf === 'object' && entityConf.icon) || 
-                 entity.attributes.icon || this._getDefaultIcon(entity);
+                 entity.attributes.icon || 
+                 '⚙';
     const state = entity.state;
     const unit = entity.attributes.unit_of_measurement || '';
-
-    // Determine indicator color
-    let indicatorColor = 'var(--muthur-primary-color)';
-    if (state === 'unavailable' || state === 'unknown') {
-      indicatorColor = '#ff0000';
-    } else if (state === 'off' || state === 'closed') {
-      indicatorColor = '#666666';
-    }
+    const isUnavailable = state === 'unavailable' || state === 'unknown';
 
     return html`
-      <div class="glance-item" @click=${() => this._handleClick(entityId)}>
-        <span class="glance-indicator" style="background-color: ${indicatorColor};"></span>
-        ${icon ? html`<div class="glance-icon">${this._renderIcon(icon)}</div>` : ''}
+      <div 
+        class="glance-item ${isUnavailable ? 'glance-unavailable' : ''}"
+        @click=${() => this._handleClick(entityId)}
+      >
+        <div class="glance-icon">${icon}</div>
+        <div class="glance-name">${name}</div>
         <div class="glance-state">
-          ${state.toUpperCase()}
-          ${unit ? html`<span class="glance-unit">${unit}</span>` : ''}
+          ${state.toUpperCase()}<span class="glance-unit">${unit}</span>
         </div>
-        ${showName ? html`<div class="glance-name">${name}</div>` : ''}
       </div>
     `;
   }
 
-  _renderIcon(icon) {
-    // If icon starts with mdi: it's a material design icon, render as emoji fallback
-    // For now just show emoji or text representation
-    const iconMap = {
-      'mdi:lightbulb': '💡',
-      'mdi:thermometer': '🌡️',
-      'mdi:water-percent': '💧',
-      'mdi:fan': '🌀',
-      'mdi:door': '🚪',
-      'mdi:motion-sensor': '🔍',
-      'mdi:power': '⚡',
-    };
-    
-    return iconMap[icon] || icon;
-  }
-
-  _getDefaultIcon(entity) {
-    const domain = entity.entity_id.split('.')[0];
-    const iconMap = {
-      'light': '💡',
-      'switch': '⚡',
-      'binary_sensor': '🔍',
-      'sensor': '📊',
-      'climate': '🌡️',
-      'fan': '🌀',
-      'cover': '🚪',
-      'lock': '🔒',
-    };
-    
-    return iconMap[domain] || '📍';
-  }
-
   _handleClick(entityId) {
-    const event = new CustomEvent('hass-more-info', {
+    const event = new Event('hass-more-info', {
       bubbles: true,
       composed: true,
-      detail: { entityId }
     });
+    event.detail = { entityId };
     this.dispatchEvent(event);
   }
 
@@ -207,15 +154,14 @@ class MuthurGlanceCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-glance-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {
     return {
-      title: 'SYSTEM GLANCE',
+      title: 'SYSTEM OVERVIEW',
       entities: [],
-      columns: null,
-      show_name: true
+      columns: 3
     };
   }
 }

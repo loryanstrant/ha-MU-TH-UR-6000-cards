@@ -219,13 +219,13 @@ class MuthurAlarmCard extends MuthurBaseCard {
               ${state === 'disarmed' ? html`
                 <button 
                   class="action-button arm"
-                  @click=${() => this._armAlarm('armed_away')}
+                  @click=${() => this._armAlarm('arm_away')}
                 >
                   ARM AWAY
                 </button>
                 <button 
                   class="action-button arm"
-                  @click=${() => this._armAlarm('armed_home')}
+                  @click=${() => this._armAlarm('arm_home')}
                 >
                   ARM HOME
                 </button>
@@ -291,6 +291,8 @@ class MuthurAlarmCard extends MuthurBaseCard {
   _armAlarm(mode) {
     const code = this._code || undefined;
     
+    // Fixed: Use correct service names 'alarm_arm_away' and 'alarm_arm_home'
+    // instead of 'alarm_armed_away' and 'alarm_armed_home'
     this.hass.callService('alarm_control_panel', `alarm_${mode}`, {
       entity_id: this.config.entity,
       code: code
@@ -334,7 +336,8 @@ class MuthurAlarmCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-alarm-card-editor');
+    // Return undefined to prevent config editor errors
+    return undefined;
   }
 
   static getStubConfig() {

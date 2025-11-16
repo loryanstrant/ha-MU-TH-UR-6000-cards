@@ -14,6 +14,7 @@ class MuthurTextCard extends MuthurBaseCard {
           font-family: var(--muthur-font-family);
           line-height: 1.6;
           white-space: pre-wrap;
+          word-wrap: break-word;
         }
 
         .text-small {
@@ -26,6 +27,10 @@ class MuthurTextCard extends MuthurBaseCard {
 
         .text-large {
           font-size: 1.2em;
+        }
+
+        .text-left {
+          text-align: left;
         }
 
         .text-center {
@@ -41,6 +46,7 @@ class MuthurTextCard extends MuthurBaseCard {
           color: var(--muthur-primary-color);
         }
 
+        /* Typing effect overrides multi-line behavior */
         .typing-effect {
           overflow: hidden;
           border-right: 2px solid var(--muthur-primary-color);
@@ -139,7 +145,8 @@ class MuthurTextCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-text-card-editor');
+    // Return undefined to prevent config editor errors
+    return undefined;
   }
 
   static getStubConfig() {

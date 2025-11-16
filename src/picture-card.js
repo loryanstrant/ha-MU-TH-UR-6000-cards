@@ -208,11 +208,17 @@ class MuthurPictureCard extends MuthurBaseCard {
         const baseUrl = entity.attributes.entity_picture.split('?')[0];
         this._imageUrl = `${baseUrl}?t=${Date.now()}`;
         this._error = false;
+      } else {
+        // Entity exists but has no entity_picture, or entity doesn't exist
+        this._error = true;
       }
     } else if (this.config.image) {
       // Static image URL
       this._imageUrl = this.config.image;
       this._error = false;
+    } else {
+      // No entity or image configured
+      this._error = true;
     }
   }
 
@@ -333,7 +339,7 @@ class MuthurPictureCard extends MuthurBaseCard {
   }
 
   static getConfigElement() {
-    return document.createElement('muthur-picture-card-editor');
+    return undefined;
   }
 
   static getStubConfig() {

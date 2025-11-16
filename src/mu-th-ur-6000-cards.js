@@ -83,7 +83,7 @@ window.customCards.push({
 });
 
 console.info(
-  '%c MU/TH/UR 6000 CARDS %c v1.1.0 ',
+  '%c MU/TH/UR 6000 CARDS %c v1.1.1 ',
   'color: #00ff41; background: #000; font-weight: bold;',
   'color: #000; background: #00ff41; font-weight: bold;'
 );
