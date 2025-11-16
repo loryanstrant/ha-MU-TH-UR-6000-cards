@@ -115,10 +115,12 @@ class MuthurButtonCard extends MuthurBaseCard {
   }
 
   renderButton(buttonConfig) {
-    const entity = buttonConfig.entity ? this.hass?.states[buttonConfig.entity] : null;
-    const name = buttonConfig.name || entity?.attributes?.friendly_name || 'Button';
-    const icon = buttonConfig.icon || entity?.attributes?.icon || null;
-    const showState = buttonConfig.show_state !== false;
+    // Handle both string entity IDs and object configs
+    const entityId = typeof buttonConfig === 'string' ? buttonConfig : buttonConfig.entity;
+    const entity = entityId ? this.hass?.states[entityId] : null;
+    const name = (typeof buttonConfig === 'object' && buttonConfig.name) || entity?.attributes?.friendly_name || 'Button';
+    const icon = (typeof buttonConfig === 'object' && buttonConfig.icon) || entity?.attributes?.icon || null;
+    const showState = typeof buttonConfig === 'object' ? (buttonConfig.show_state !== false) : true;
 
     return html`
       <button 
@@ -139,25 +141,30 @@ class MuthurButtonCard extends MuthurBaseCard {
   }
 
   handleButtonClick(buttonConfig) {
+    // Handle both string entity IDs and object configs
+    const entityId = typeof buttonConfig === 'string' ? buttonConfig : buttonConfig.entity;
+    const tapAction = typeof buttonConfig === 'object' ? buttonConfig.tap_action : null;
+    
     // Handle tap_action if defined
-    if (buttonConfig.tap_action) {
-      this.handleAction(buttonConfig.tap_action, buttonConfig.entity);
+    if (tapAction) {
+      this.handleAction(tapAction, entityId);
       return;
     }
 
     // Legacy behavior for backward compatibility
-    if (buttonConfig.entity) {
-      const serviceName = (buttonConfig.action || 'toggle').split('.')[1] || 'toggle';
-      const entityDomain = buttonConfig.entity.split('.')[0];
+    if (entityId) {
+      const action = typeof buttonConfig === 'object' ? buttonConfig.action : null;
+      const serviceName = (action || 'toggle').split('.')[1] || 'toggle';
+      const entityDomain = entityId.split('.')[0];
       
       this.hass.callService(
         entityDomain,
         serviceName,
         {
-          entity_id: buttonConfig.entity
+          entity_id: entityId
         }
       );
-    } else if (buttonConfig.service) {
+    } else if (typeof buttonConfig === 'object' && buttonConfig.service) {
       const [domain, service] = buttonConfig.service.split('.');
       this.hass.callService(
         domain,
