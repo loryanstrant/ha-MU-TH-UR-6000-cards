@@ -39,14 +39,8 @@ Example cards styled after the MU/TH/UR 6000 terminal (see `mother-examples/` fo
 ### HACS (Recommended)
 
 1. Open HACS in your Home Assistant instance
-2. Go to "Frontend" section
-3. Click the menu icon in the top right
-4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards`
-6. Select category: "Lovelace"
-7. Click "Add"
-8. Find "MU/TH/UR 6000 Cards" in the list and click "Install"
-9. Restart Home Assistant
+2. Find "MU/TH/UR 6000 Cards" in the list and download/install it
+3. Restart Home Assistant
 
 ### Manual Installation
 
@@ -63,14 +57,6 @@ lovelace:
 
 4. Restart Home Assistant
 
-## Development
-
-For local development and testing:
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Build the project: `npm run build`
-4. Open `test.html` in a browser to preview cards with mock data
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
