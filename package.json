@@ -30,7 +30,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "eslint": "^8.52.0",
-    "rollup": "^4.1.4"
+    "rollup": "^4.59.0"
   },
   "dependencies": {
     "lit": "^3.0.0"
