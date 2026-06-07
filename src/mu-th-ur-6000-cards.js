@@ -26,6 +26,11 @@ window.customCards.push({
   name: 'MU/TH/UR 6000 Sensor Card',
   description: 'Display sensor data with retro terminal aesthetics',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'sensor'
+      ? { config: { type: 'custom:muthur-sensor-card', entity: entityId } }
+      : null;
+  },
 });
 window.customCards.push({
   type: 'muthur-button-card',
@@ -44,6 +49,11 @@ window.customCards.push({
   name: 'MU/TH/UR 6000 Gauge Card',
   description: 'Display gauge visualization for numeric sensors',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'sensor'
+      ? { config: { type: 'custom:muthur-gauge-card', entity: entityId } }
+      : null;
+  },
 });
 window.customCards.push({
   type: 'muthur-clock-card',
@@ -62,28 +72,48 @@ window.customCards.push({
   name: 'MU/TH/UR 6000 Light Card',
   description: 'Control lights with terminal-style interface',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'light'
+      ? { config: { type: 'custom:muthur-light-card', entity: entityId } }
+      : null;
+  },
 });
 window.customCards.push({
   type: 'muthur-picture-card',
   name: 'MU/TH/UR 6000 Picture Card',
   description: 'Display images and camera feeds in terminal style',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'camera'
+      ? { config: { type: 'custom:muthur-picture-card', entity: entityId } }
+      : null;
+  },
 });
 window.customCards.push({
   type: 'muthur-weather-card',
   name: 'MU/TH/UR 6000 Weather Card',
   description: 'Display weather information in terminal format',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'weather'
+      ? { config: { type: 'custom:muthur-weather-card', entity: entityId } }
+      : null;
+  },
 });
 window.customCards.push({
   type: 'muthur-alarm-card',
   name: 'MU/TH/UR 6000 Alarm Card',
   description: 'Control alarm systems with terminal-style keypad',
   preview: true,
+  getEntitySuggestion(hass, entityId) {
+    return entityId.split('.')[0] === 'alarm_control_panel'
+      ? { config: { type: 'custom:muthur-alarm-card', entity: entityId } }
+      : null;
+  },
 });
 
 console.info(
-  '%c MU/TH/UR 6000 CARDS %c v1.1.6 ',
+  '%c MU/TH/UR 6000 CARDS %c v1.1.8 ',
   'color: #00ff41; background: #000; font-weight: bold;',
   'color: #000; background: #00ff41; font-weight: bold;'
 );
