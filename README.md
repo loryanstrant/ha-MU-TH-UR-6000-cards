@@ -1,13 +1,18 @@
-![MU/TH/UR 6000](https://img.shields.io/badge/MU%2FTH%2FUR-6000-00ff41?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==)
-![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-41BDF5?style=for-the-badge&logo=home-assistant)
-![License](https://img.shields.io/badge/License-MIT-00ff41?style=for-the-badge)
-
 # MU/TH/UR 6000 Cards for Home Assistant
+
+[![HACS](https://img.shields.io/badge/HACS-Custom-41BDF5?style=flat-square)](https://github.com/hacs/integration)
+[![Release](https://img.shields.io/github/v/release/loryanstrant/ha-MU-TH-UR-6000-cards?style=flat-square)](https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/releases)
+[![Release date](https://img.shields.io/github/release-date/loryanstrant/ha-MU-TH-UR-6000-cards?style=flat-square)](https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/releases)
+[![Downloads](https://img.shields.io/github/downloads/loryanstrant/ha-MU-TH-UR-6000-cards/total?style=flat-square)](https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/releases)
+[![License](https://img.shields.io/github/license/loryanstrant/ha-MU-TH-UR-6000-cards?style=flat-square)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/loryanstrant/ha-MU-TH-UR-6000-cards?style=flat-square)](https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/commits)
+[![Stars](https://img.shields.io/github/stars/loryanstrant/ha-MU-TH-UR-6000-cards?style=flat-square)](https://github.com/loryanstrant/ha-MU-TH-UR-6000-cards/stargazers)
+
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=loryanstrant&repository=ha-MU-TH-UR-6000-cards&category=plugin)
 
 A series of custom cards for Home Assistant based on the appearance of the MU/TH/UR 6000 mainframe computer from the Alien movie franchise. These cards feature a retro green monochrome terminal aesthetic with scanline effects, terminal-style text, and the iconic Weyland-Yutani Corporation design language.
 
 These pair nicely with the [Weyland-Yutani theme](https://github.com/loryanstrant/ha-weylandyutani).
-
 
 ## Inspiration
 
@@ -57,7 +62,6 @@ lovelace:
 
 4. Restart Home Assistant
 
-
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
 ## Card Types
@@ -69,7 +73,6 @@ Displays multiple entity states in a structured list format with status indicato
 #### Example
 
 <img width="605" height="440" alt="image" src="https://github.com/user-attachments/assets/3a17b9f2-aab6-4df6-aa6e-dbd87fdd9328" />
-
 
 #### Configuration
 
@@ -109,7 +112,6 @@ Displays a single sensor value with optional progress bar visualization.
 
 <img width="578" height="487" alt="image" src="https://github.com/user-attachments/assets/36366375-9930-47d5-bf3c-b1e0e81d7637" />
 
-
 #### Configuration
 
 ```yaml
@@ -138,7 +140,6 @@ Interactive buttons for controlling entities or triggering services.
 #### Example
 
 <img width="629" height="458" alt="image" src="https://github.com/user-attachments/assets/4fb61bf7-8c01-4656-8877-359cbc410a40" />
-
 
 #### Configuration
 
@@ -219,7 +220,6 @@ Displays text messages in terminal format.
 #### Example
 
 <img width="586" height="515" alt="image" src="https://github.com/user-attachments/assets/a5349c6b-0ff5-4283-b95a-4a430dad8a65" />
-
 
 #### Configuration
 
@@ -363,7 +363,6 @@ Compact multi-entity overview card displaying multiple entities in a grid.
 
 <img width="1162" height="398" alt="image" src="https://github.com/user-attachments/assets/bc9eec89-4c9c-4405-90c4-0dc1fcb65a58" />
 
-
 #### Configuration
 
 ```yaml
@@ -396,7 +395,6 @@ Dedicated light entity control with brightness slider and on/off toggle.
 #### Example
 
 <img width="575" height="500" alt="image" src="https://github.com/user-attachments/assets/6c4a8ad2-e44a-4f16-9027-46cb856b0260" />
-
 
 #### Configuration
 
@@ -468,7 +466,6 @@ Display weather information with current conditions and forecast.
 #### Example
 
 <img width="566" height="576" alt="image" src="https://github.com/user-attachments/assets/c726e12c-99e3-47de-b47f-fc506c16fa5a" />
-
 
 #### Configuration
 
@@ -711,7 +708,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Development Approach
 <img width="256" height="256" alt="Vibe Coding with GitHub Copilot 256x256" src="https://github.com/user-attachments/assets/bb41d075-6b3e-4f2b-a88e-94b2022b5d4f" />
-
 
 ## License
 
