@@ -1,0 +1,678 @@
+{
+  "schema_version": "1.0",
+  "repository": "ha-MU-TH-UR-6000-cards",
+  "identity": {
+    "description": "A series of custom cards for Home Assistant based on the appearance of the MU/TH/UR 6000 mainframe computer from the Alien movie franchise. These cards feature a retro green monochrome terminal aesthetic with scanline effects, terminal-style text, and the iconic Weyland-Yutani Corporation design lan",
+    "default_branch": "main",
+    "languages": {
+      "JavaScript": 15
+    },
+    "topics": [],
+    "licence": "MIT License",
+    "file_count": 50
+  },
+  "start_here": {
+    "readme": "README.md",
+    "agents_md": "AGENTS.md",
+    "entry_points": [],
+    "decision_records": [],
+    "build_config": [
+      ".eslintrc.json",
+      "hacs.json",
+      "package.json"
+    ],
+    "source_roots": [
+      "src",
+      ".",
+      "dist"
+    ]
+  },
+  "documentation": [
+    {
+      "path": ".github/copilot-instructions.md",
+      "title": "Copilot instructions — ha-MU-TH-UR-6000-cards",
+      "lines": 35,
+      "headings": [
+        {
+          "level": 2,
+          "text": "What this repo is",
+          "anchor": "what-this-repo-is"
+        },
+        {
+          "level": 2,
+          "text": "Repo shape",
+          "anchor": "repo-shape"
+        },
+        {
+          "level": 2,
+          "text": "Conventions",
+          "anchor": "conventions"
+        },
+        {
+          "level": 2,
+          "text": "Never",
+          "anchor": "never"
+        }
+      ]
+    },
+    {
+      "path": "CHANGELOG.md",
+      "title": "Changelog",
+      "lines": 88,
+      "headings": [
+        {
+          "level": 2,
+          "text": "[1.1.1] - 2025-11-16",
+          "anchor": "111---2025-11-16"
+        },
+        {
+          "level": 3,
+          "text": "Fixed",
+          "anchor": "fixed"
+        },
+        {
+          "level": 2,
+          "text": "[1.1.0] - 2025-11-15",
+          "anchor": "110---2025-11-15"
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "anchor": "added"
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "anchor": "changed"
+        },
+        {
+          "level": 3,
+          "text": "Fixed",
+          "anchor": "fixed-1"
+        },
+        {
+          "level": 2,
+          "text": "[1.0.0] - 2025-10-25",
+          "anchor": "100---2025-10-25"
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "anchor": "added-1"
+        },
+        {
+          "level": 3,
+          "text": "Design Influences",
+          "anchor": "design-influences"
+        }
+      ]
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "title": "Contributing to MU/TH/UR 6000 Cards",
+      "lines": 153,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Code of Conduct",
+          "anchor": "code-of-conduct"
+        },
+        {
+          "level": 2,
+          "text": "How to Contribute",
+          "anchor": "how-to-contribute"
+        },
+        {
+          "level": 3,
+          "text": "Reporting Bugs",
+          "anchor": "reporting-bugs"
+        },
+        {
+          "level": 3,
+          "text": "Suggesting Features",
+          "anchor": "suggesting-features"
+        },
+        {
+          "level": 3,
+          "text": "Code Contributions",
+          "anchor": "code-contributions"
+        },
+        {
+          "level": 3,
+          "text": "Documentation",
+          "anchor": "documentation"
+        },
+        {
+          "level": 2,
+          "text": "Project Structure",
+          "anchor": "project-structure"
+        },
+        {
+          "level": 2,
+          "text": "Design Resources",
+          "anchor": "design-resources"
+        },
+        {
+          "level": 2,
+          "text": "Questions?",
+          "anchor": "questions"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "title": "MU/TH/UR 6000 Cards for Home Assistant",
+      "lines": 720,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Inspiration",
+          "anchor": "inspiration"
+        },
+        {
+          "level": 2,
+          "text": "Features",
+          "anchor": "features"
+        },
+        {
+          "level": 2,
+          "text": "Installation",
+          "anchor": "installation"
+        },
+        {
+          "level": 3,
+          "text": "HACS (Recommended)",
+          "anchor": "hacs-recommended"
+        },
+        {
+          "level": 3,
+          "text": "Manual Installation",
+          "anchor": "manual-installation"
+        },
+        {
+          "level": 2,
+          "text": "Card Types",
+          "anchor": "card-types"
+        },
+        {
+          "level": 3,
+          "text": "1. Status Card",
+          "anchor": "1-status-card"
+        },
+        {
+          "level": 3,
+          "text": "2. Sensor Card",
+          "anchor": "2-sensor-card"
+        },
+        {
+          "level": 3,
+          "text": "3. Button Card",
+          "anchor": "3-button-card"
+        },
+        {
+          "level": 3,
+          "text": "4. Text Card",
+          "anchor": "4-text-card"
+        },
+        {
+          "level": 3,
+          "text": "5. Gauge Card",
+          "anchor": "5-gauge-card"
+        },
+        {
+          "level": 3,
+          "text": "6. Clock Card",
+          "anchor": "6-clock-card"
+        },
+        {
+          "level": 3,
+          "text": "7. Glance Card",
+          "anchor": "7-glance-card"
+        },
+        {
+          "level": 3,
+          "text": "8. Light Card",
+          "anchor": "8-light-card"
+        },
+        {
+          "level": 3,
+          "text": "9. Picture Card",
+          "anchor": "9-picture-card"
+        },
+        {
+          "level": 3,
+          "text": "10. Weather Card",
+          "anchor": "10-weather-card"
+        },
+        {
+          "level": 3,
+          "text": "11. Alarm Card",
+          "anchor": "11-alarm-card"
+        },
+        {
+          "level": 2,
+          "text": "Styling",
+          "anchor": "styling"
+        },
+        {
+          "level": 3,
+          "text": "Thedus Font (Optional)",
+          "anchor": "thedus-font-optional"
+        },
+        {
+          "level": 2,
+          "text": "Examples",
+          "anchor": "examples"
+        },
+        {
+          "level": 3,
+          "text": "Security Dashboard",
+          "anchor": "security-dashboard"
+        },
+        {
+          "level": 3,
+          "text": "Climate Control",
+          "anchor": "climate-control"
+        },
+        {
+          "level": 3,
+          "text": "System Monitoring",
+          "anchor": "system-monitoring"
+        },
+        {
+          "level": 3,
+          "text": "Surveillance & Weather",
+          "anchor": "surveillance--weather"
+        },
+        {
+          "level": 3,
+          "text": "Lighting Control",
+          "anchor": "lighting-control"
+        },
+        {
+          "level": 2,
+          "text": "Design Inspiration",
+          "anchor": "design-inspiration"
+        },
+        {
+          "level": 2,
+          "text": "Compatibility",
+          "anchor": "compatibility"
+        },
+        {
+          "level": 2,
+          "text": "Contributing",
+          "anchor": "contributing"
+        },
+        {
+          "level": 2,
+          "text": "Development Approach",
+          "anchor": "development-approach"
+        },
+        {
+          "level": 2,
+          "text": "License",
+          "anchor": "license"
+        }
+      ]
+    },
+    {
+      "path": "examples/example-configurations.md",
+      "title": "MU/TH/UR 6000 Cards - Example Configurations",
+      "lines": 358,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Security Dashboard Example",
+          "anchor": "security-dashboard-example"
+        },
+        {
+          "level": 2,
+          "text": "Climate Monitoring",
+          "anchor": "climate-monitoring"
+        },
+        {
+          "level": 2,
+          "text": "Power Management",
+          "anchor": "power-management"
+        },
+        {
+          "level": 2,
+          "text": "Communication Station",
+          "anchor": "communication-station"
+        },
+        {
+          "level": 2,
+          "text": "Medical Bay",
+          "anchor": "medical-bay"
+        },
+        {
+          "level": 2,
+          "text": "Complete Bridge View",
+          "anchor": "complete-bridge-view"
+        },
+        {
+          "level": 2,
+          "text": "Minimal Example",
+          "anchor": "minimal-example"
+        },
+        {
+          "level": 2,
+          "text": "Tips for Best Results",
+          "anchor": "tips-for-best-results"
+        },
+        {
+          "level": 2,
+          "text": "Customization Ideas",
+          "anchor": "customization-ideas"
+        }
+      ]
+    },
+    {
+      "path": "examples/visual-preview.md",
+      "title": "Visual Preview Guide",
+      "lines": 144,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Card Appearance",
+          "anchor": "card-appearance"
+        },
+        {
+          "level": 2,
+          "text": "Status Card Example",
+          "anchor": "status-card-example"
+        },
+        {
+          "level": 2,
+          "text": "Sensor Card Example",
+          "anchor": "sensor-card-example"
+        },
+        {
+          "level": 2,
+          "text": "Button Card Example",
+          "anchor": "button-card-example"
+        },
+        {
+          "level": 2,
+          "text": "Text Card Example",
+          "anchor": "text-card-example"
+        },
+        {
+          "level": 2,
+          "text": "Color Scheme",
+          "anchor": "color-scheme"
+        },
+        {
+          "level": 3,
+          "text": "Primary Colors",
+          "anchor": "primary-colors"
+        },
+        {
+          "level": 3,
+          "text": "Status Indicators",
+          "anchor": "status-indicators"
+        },
+        {
+          "level": 2,
+          "text": "Effects",
+          "anchor": "effects"
+        },
+        {
+          "level": 2,
+          "text": "Typography",
+          "anchor": "typography"
+        },
+        {
+          "level": 2,
+          "text": "Integration with Weyland-Yutani Theme",
+          "anchor": "integration-with-weyland-yutani-theme"
+        },
+        {
+          "level": 2,
+          "text": "Customization Tips",
+          "anchor": "customization-tips"
+        },
+        {
+          "level": 2,
+          "text": "Accessibility Note",
+          "anchor": "accessibility-note"
+        }
+      ]
+    },
+    {
+      "path": "fonts/README.md",
+      "title": "Thedus Font",
+      "lines": 36,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Font Files",
+          "anchor": "font-files"
+        },
+        {
+          "level": 2,
+          "text": "Usage",
+          "anchor": "usage"
+        },
+        {
+          "level": 2,
+          "text": "License",
+          "anchor": "license"
+        },
+        {
+          "level": 2,
+          "text": "Integration",
+          "anchor": "integration"
+        }
+      ]
+    },
+    {
+      "path": "info.md",
+      "title": "MU/TH/UR 6000 Cards",
+      "lines": 49,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Features",
+          "anchor": "features"
+        },
+        {
+          "level": 2,
+          "text": "Available Cards",
+          "anchor": "available-cards"
+        },
+        {
+          "level": 3,
+          "text": "Status Card",
+          "anchor": "status-card"
+        },
+        {
+          "level": 3,
+          "text": "Sensor Card",
+          "anchor": "sensor-card"
+        },
+        {
+          "level": 3,
+          "text": "Button Card",
+          "anchor": "button-card"
+        },
+        {
+          "level": 3,
+          "text": "Text Card",
+          "anchor": "text-card"
+        },
+        {
+          "level": 2,
+          "text": "Quick Start",
+          "anchor": "quick-start"
+        },
+        {
+          "level": 2,
+          "text": "Documentation",
+          "anchor": "documentation"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "source_roots": [
+      "src",
+      ".",
+      "dist"
+    ],
+    "symbol_source": "repomix (tree-sitter signatures)",
+    "routes": [],
+    "files": [
+      {
+        "path": "src/alarm-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurAlarmCard",
+            "parent": "",
+            "signature": "class MuthurAlarmCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/base-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurBaseCard",
+            "parent": "",
+            "signature": "export class MuthurBaseCard extends LitElement"
+          }
+        ]
+      },
+      {
+        "path": "src/button-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurButtonCard",
+            "parent": "",
+            "signature": "class MuthurButtonCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/clock-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurClockCard",
+            "parent": "",
+            "signature": "class MuthurClockCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/gauge-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurGaugeCard",
+            "parent": "",
+            "signature": "class MuthurGaugeCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/glance-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurGlanceCard",
+            "parent": "",
+            "signature": "class MuthurGlanceCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/light-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurLightCard",
+            "parent": "",
+            "signature": "class MuthurLightCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/picture-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurPictureCard",
+            "parent": "",
+            "signature": "class MuthurPictureCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/sensor-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurSensorCard",
+            "parent": "",
+            "signature": "class MuthurSensorCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/status-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurStatusCard",
+            "parent": "",
+            "signature": "class MuthurStatusCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/text-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurTextCard",
+            "parent": "",
+            "signature": "class MuthurTextCard extends MuthurBaseCard"
+          }
+        ]
+      },
+      {
+        "path": "src/weather-card.js",
+        "symbols": [
+          {
+            "kind": "class",
+            "name": "MuthurWeatherCard",
+            "parent": "",
+            "signature": "class MuthurWeatherCard extends MuthurBaseCard"
+          }
+        ]
+      }
+    ]
+  },
+  "tests": [],
+  "operations": [
+    ".github/workflows/build.yml",
+    ".github/workflows/validate.yaml"
+  ],
+  "limitations": {
+    "unparsed_languages": [],
+    "excluded_dirs": [],
+    "code_map_truncated": false,
+    "code_map_symbols_capped": false,
+    "tracked_files_only": true
+  },
+  "generated": {
+    "source_commit": "05946213f82fc055f6e2cb5b3d528a2d37d89242",
+    "content_hash": "fadf6349fe18253f",
+    "generator": "navgen"
+  }
+}
